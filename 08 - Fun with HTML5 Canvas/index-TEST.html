@@ -5,8 +5,22 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
+  <div class="controls">
+    <label for="spacing">Width:</label>
+    <input id="width" type="range" name="width" min="10" max="200" value="10">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="range" name="base" min="1" max="360" value="10">
+  </div>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+  const width=document.getElementById('width');
+  const base=document.getElementById('base');
+
+  console.log(width);
+  console.log(base);
+
+  /*test above*/
   const canvas=document.getElementById('draw');
   const ctx=canvas.getContext('2d');
   canvas.width=window.innerWidth;
@@ -32,8 +46,22 @@
     ctx.stroke();
 
     [lastX,lastY]=[e.offsetX,e.offsetY];
-    hue++;
-    if(hue>=360){
+
+    function changeWidth(){
+      ctx.lineWidth=width.value;
+    }
+    
+    function changeColour(){
+      hue=base.value;
+    }
+
+    width.addEventListener('change',changeWidth);
+    width.addEventListener('mousemove',changeWidth);
+
+    base.addEventListener('change',changeColour);
+    base.addEventListener('mousemove',changeColour);
+   /*  hue++;
+   if(hue>=360){
       hue=0;
     }
   
@@ -46,7 +74,7 @@
    }
    else{
     ctx.lineWidth--;
-   }
+   }*/
   }
   canvas.addEventListener('mousedown',(e)=>{
     isDrawing=true;
@@ -56,7 +84,7 @@
   canvas.addEventListener('mousemove',draw);
   canvas.addEventListener('mouseup',()=>isDrawing=false);
   canvas.addEventListener('mouseout',()=>isDrawing=false);
-
+/*test under*/
 
 </script>
 
